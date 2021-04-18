@@ -31,27 +31,57 @@ public:
     virtual T pop() = 0;
 
 public:
-    class iterator{
+    T* headerAddress = nullptr;
+    T* lastAddress = nullptr;
 
-    };
+    string name;
 
+public:
+    void setName(string theName){
+        name = theName;
+    }
+    string getName(){
+        return name;
+    }
+    void setHeaderAddress(T* address){
+        headerAddress = address;
+    }
+    T* getHeaderAddress(){
+        return headerAddress;
+    }
 //nodes consist of the value and a link to the next node
 private:
     struct Node{
         T element;
         Node* link;
-//blah
     };
 
 
 protected:
     void insertStart(T value){
+        Node headerNode = *headerAddress;
+        Node nextNode = *headerNode.link;
 
+        Node *addedNode = nullptr;
+        addedNode = new Node;
+
+        addedNode->link = headerNode.link;
+        addedNode->element = value;
+
+        headerNode.link = *addedNode;
     }
     void insertEnd(T value){
+        Node lastNode = *lastAddress;
 
+        Node *addedNode = nullptr;
+        addedNode = new Node;
+
+        addedNode->link = nullptr;
+        addedNode->element = value;
+
+        lastNode.link = *addedNode;
     }
-    T removeStart(T* headerAddress){
+    T removeStart(){
         Node headerNode = *headerAddress;
         Node nextNode = *headerNode.link;
 
