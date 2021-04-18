@@ -1,0 +1,1 @@
+/usr/bin/g++.exe -g -Wl,--enable-auto-import CMakeFiles/DSA_PA1.dir/main.cpp.o -o DSA_PA1.exe -Wl,--out-implib,libDSA_PA1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
