@@ -75,17 +75,26 @@ private:
     };
 //defining methods for use for subclasses and constructor
 public:
-
     virtual void push(T value) = 0;
     virtual T pop() = 0;
-    virtual string getName() = 0;
+    //virtual string getName() = 0;
 
 //defining size
-public:
+private:
     int size = 0;
+    string Name;
+
+public:
     int getLength(){
         return size;
     }
+    string getName(){
+        return Name;
+    }
+    SimpleList(string givenName){
+        Name = givenName;
+    }
+
 //creating a header node and storing the address of the last node for use in push/pop functions
 public:
     Node* headerNode{};
@@ -97,7 +106,7 @@ public:
         lastNode = headerNode;
     }
 
-public:
+protected:
     /*
      * Creates a new node with given value
      * Links the new node to the node that was previously first
@@ -179,11 +188,8 @@ public:
     T pop(){
         return this->removeStart();
     }
-    string getName(){
-        return name;
-    }
 
-    Stack(string givenName){
+    Stack(string givenName):SimpleList<T>(givenName){
         name = givenName;
     }
 };
@@ -202,10 +208,7 @@ public:
     T pop(){
         return this->removeStart();
     }
-    string getName(){
-        return name;
-    }
-    Queue(string givenName){
+    Queue(string givenName):SimpleList<T>(givenName){
         name = givenName;
     }
 };
