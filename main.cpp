@@ -238,7 +238,6 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
             }
             else if(listType == "i" && listStructure == "stack"){
                 if(getList(listName, listSLi) == nullptr){
-                    //output << "d has been pushed!";
                     SimpleList<int> *pSLi;
                     pSLi = new Stack<int>(listName);
                     listSLi.push_front(pSLi);
@@ -292,7 +291,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(SLAddressD == nullptr){
                     output << "ERROR: This name does not exist!" << endl;
                 }
-                else if(SLAddressD->getLength() == 0)
+                else if(SLAddressD->getLength() < 1)
                 {
                     output << "ERROR: This list is empty!" << endl;
                 }
@@ -305,7 +304,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(SLAddressI == nullptr){
                     output << "ERROR: This name does not exist!" << endl;
                 }
-                else if(SLAddressI->getLength() == 0)
+                else if(SLAddressI->getLength() < 1)
                 {
                     output << "ERROR: This list is empty!" << endl;
                 }
@@ -318,7 +317,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(SLAddressS == nullptr){
                     output << "ERROR: This name does not exist!" << endl;
                 }
-                else if(SLAddressS->getLength() == 0)
+                else if(SLAddressS->getLength() < 1)
                 {
                     output << "ERROR: This list is empty!" << endl;
                 }
