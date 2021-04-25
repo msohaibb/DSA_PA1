@@ -80,13 +80,13 @@ public:
     virtual T pop() = 0;
     virtual string getName() = 0;
 
-//list-related variables and getters/setters
+//defining size
 public:
     int size = 0;
     int getLength(){
         return size;
     }
-
+//creating a header node and storing the address of the last node for use in push/pop functions
 public:
     Node* headerNode{};
     Node* lastNode{};
@@ -98,6 +98,12 @@ public:
     }
 
 public:
+    /*
+     * Creates a new node with given value
+     * Links the new node to the node that was previously first
+     * Changes header link to the address of the new node (effectively inserting new node at the beginning)
+     * This is the push implementation for Stacks
+     */
     void insertStart(T value) {
         Node *addedNode = new Node;
 
@@ -105,13 +111,18 @@ public:
         addedNode->element = value;
         headerNode->link = addedNode;
 
-        //not required as lastNode is not useful in stacks, just done for consistency's sake
+        //not required as lastNode is not useful in Stacks, just done for consistency's sake
         if(size == 0){
             lastNode = headerNode;
         }
         size++;
     }
-
+    /*
+     * Creates a new node with given value
+     * The node that was previously last has its link changed to the address of the new node
+     * The last node is now the new node
+     * This is the push implementation for Queues
+     */
     void insertEnd(T value){
         //Node lastNode = *lastAddress;
 
@@ -133,6 +144,11 @@ public:
 
         size++;
     }
+    /*
+     * Finds the first node and the element inside of it.
+     * Finds the second node.
+     * Deletes the first node, and sets the second node to be the first
+     */
     T removeStart(){
         Node *firstNode = headerNode->link;
         T poppedValue = firstNode->element;
@@ -141,7 +157,6 @@ public:
 
         delete((headerNode->link));
         headerNode->link = secondNode;
-
 
         size--;
         return poppedValue;
@@ -196,7 +211,7 @@ public:
 };
 
 /*
- * Search method. Looks through a C++ List of SimpleLists until it finds the one that
+ * Search method. Looks through a C++ List of SimpleLists until it finds the one that has the right name
  */
 template <typename T>
 SimpleList<T>* getList(string name, list<SimpleList<T>*> listSL){
@@ -206,8 +221,10 @@ SimpleList<T>* getList(string name, list<SimpleList<T>*> listSL){
     }
     return nullptr;
 }
-
-void parse(const string& readFile, const string& writeFile) { //opens the input file
+/*
+ * Function that opens and reads the file, and outputs results to another file
+ */
+void parse(const string& readFile, const string& writeFile) {
     ifstream input(readFile);
     ofstream output(writeFile);
     string line;
@@ -219,6 +236,10 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
     double valueDouble;
     string valueString;
 
+    /*
+     * These are the C++ lists that contain the SimpleLists of each type
+     * Each C++ list contains both Stacks and Queues
+     */
     list<SimpleList<int>*> listSLi;
     list<SimpleList<double>*> listSLd;
     list<SimpleList<string>*> listSLs;
@@ -226,6 +247,13 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
     while(getline(input, line))
     {
         output << "PROCESSING COMMAND: " << line << endl;
+        /*
+         * This is where SimpleLists are created
+         * Checks whether file is asking for Stack/Queue
+         * Checks which type of list it will be
+         * Checks to see if a simpleList of that name already exists
+         * If not, creates a Stack/Queue of the given type and pushes it to the appropriate C++ list
+         */
         if(split(line, 0) == "create"){
 
             listType = split(line,  1)[0];
@@ -300,9 +328,10 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
             }
         }
         /*
-         * pop usage
-         * first checks if array is empty
-         * if not, pops the function and prints the value popped
+         * This is where SimpleLists are popped.
+         * It checks which type of SimpleList it is and uses the appropriate C++ List
+         * It looks for the name in the C++ List.
+         * If it finds it, pops the function and prints the value popped
          */
 
         else if(split(line, 0) == "pop"){
@@ -348,6 +377,12 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 }
             }
         }
+        /*
+         * This is where SimpleLists are pushed.
+         * It checks which type of SimpleList it is and uses the appropriate C++ List
+         * It looks for the name in the C++ List.
+         * If it finds it, pushes the given value onto the SimpleList
+         */
         else{
             listType = split(line, 1)[0];
             listName = split(line, 1);
