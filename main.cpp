@@ -102,25 +102,16 @@ public:
         Node *addedNode = new Node;
 
         addedNode->link = headerNode->link;
-
         addedNode->element = value;
-
-
-
         headerNode->link = addedNode;
 
+        //not required as lastNode is not useful in stacks, just done for consistency's sake
         if(size == 0){
             lastNode = headerNode;
         }
-
-        cout << "the address of " << addedNode->element << " is " << addedNode<< endl;
-        cout << "and the link is " << addedNode->link << endl;
-        cout << "address of header node is " << headerNode << endl;
-        cout << "link of header node is " << headerNode->link << endl;
-        cout << endl;
-
         size++;
     }
+
     void insertEnd(T value){
         //Node lastNode = *lastAddress;
 
@@ -130,10 +121,14 @@ public:
         addedNode->link = nullptr;
         addedNode->element = value;
 
+        lastNode->link = addedNode;
+
         lastNode = addedNode;
 
+        cout << size;
+
         if(size == 0){
-            headerNode = lastNode;
+            headerNode->link = lastNode;
         }
 
         size++;
@@ -144,18 +139,8 @@ public:
 
         Node *secondNode = firstNode->link;
 
-        cout << "the address of " << poppedValue << " is " << firstNode << endl;
-        cout << "and the link is " << firstNode->link << endl;
-        cout << "address of header node is " << headerNode << endl;
-        cout << "the old link of header node is " << headerNode->link << endl;
-
-
         delete((headerNode->link));
-
         headerNode->link = secondNode;
-
-        cout << "the new link of header node is " << headerNode->link << endl;
-        cout << endl;
 
 
         size--;
@@ -164,6 +149,9 @@ public:
     }
 };
 
+/*
+ * FIFO implementation of SimpleList. Push is insertStart()
+ */
 template<typename T>
 class Stack:public SimpleList<T>{
 string name;
@@ -185,6 +173,9 @@ public:
     }
 };
 
+/*
+ * LIFO implementation of SimpleList. Push is insertEnd()
+ */
 template<typename T>
 class Queue:public SimpleList<T>{
 //LIFO
@@ -204,6 +195,9 @@ public:
     }
 };
 
+/*
+ * Search method. Looks through a C++ List of SimpleLists until it finds the one that
+ */
 template <typename T>
 SimpleList<T>* getList(string name, list<SimpleList<T>*> listSL){
     for (auto iter = listSL.begin(); iter != listSL.end(); ++iter){
