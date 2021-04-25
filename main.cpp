@@ -9,7 +9,6 @@
 #include <string>
 #include <list>
 #include <new>
-#include <utility>
 using namespace std;
 
 
@@ -22,7 +21,7 @@ string split(string phrase, int index){
     string firstWord;
     string secondWord;
     string thirdWord;
-    int temp;
+    int temp = 0;
 
     for(int i = 0; i < phrase.length(); i++)
     {
@@ -133,8 +132,6 @@ protected:
      * This is the push implementation for Queues
      */
     void insertEnd(T value){
-        //Node lastNode = *lastAddress;
-
         Node *addedNode;
         addedNode = new Node;
 
@@ -178,7 +175,6 @@ protected:
  */
 template<typename T>
 class Stack:public SimpleList<T>{
-string name;
 //LIFO
 public:
     void push(T value){
@@ -189,9 +185,7 @@ public:
         return this->removeStart();
     }
 
-    Stack(string givenName):SimpleList<T>(givenName){
-        name = givenName;
-    }
+    Stack(string givenName):SimpleList<T>(givenName){}
 };
 
 /*
@@ -200,7 +194,6 @@ public:
 template<typename T>
 class Queue:public SimpleList<T>{
 //LIFO
-    string name;
 public:
     void push(T value){
         this->insertEnd(value);
@@ -208,13 +201,11 @@ public:
     T pop(){
         return this->removeStart();
     }
-    Queue(string givenName):SimpleList<T>(givenName){
-        name = givenName;
-    }
+    Queue(string givenName):SimpleList<T>(givenName){}
 };
 
 /*
- * Search method. Looks through a C++ List of SimpleLists until it finds the one that has the right name
+ * Search method. Looks through a C++ List of SimpleLists until it finds the one that has the right name and returns its address
  */
 template <typename T>
 SimpleList<T>* getList(string name, list<SimpleList<T>*> listSL){
