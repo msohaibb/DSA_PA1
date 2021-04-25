@@ -68,7 +68,7 @@ template<typename T>
 class SimpleList
 {
 //nodes consist of the value and a link to the next node
-public:
+private:
     struct Node{
         T element;
         Node* link;
@@ -88,29 +88,37 @@ public:
     }
 
 public:
-    Node* headerNode = new Node();
-    Node* lastNode = headerNode;
-    /*Node* initialize(){
-        Node *headerNode;
+    Node* headerNode{};
+    Node* lastNode{};
+    void initialize(){
         headerNode = new Node();
-        //headerNode->element = 0;
         headerNode->link = nullptr;
 
-
-        return headerNode;
-    }*/
+        lastNode = headerNode;
+    }
 
 public:
-    void insertStart(T value){
+    void insertStart(T value) {
         Node *addedNode = new Node;
-        addedNode->link = headerNode;
+
+        addedNode->link = headerNode->link;
+
         addedNode->element = value;
+
+
 
         headerNode->link = addedNode;
 
         if(size == 0){
-            lastNode = addedNode->link;
+            lastNode = headerNode;
         }
+
+        cout << "the address of " << addedNode->element << " is " << addedNode<< endl;
+        cout << "and the link is " << addedNode->link << endl;
+        cout << "address of header node is " << headerNode << endl;
+        cout << "link of header node is " << headerNode->link << endl;
+        cout << endl;
+
         size++;
     }
     void insertEnd(T value){
@@ -124,17 +132,31 @@ public:
 
         lastNode = addedNode;
 
-        lastNode->link = addedNode;
+        if(size == 0){
+            headerNode = lastNode;
+        }
 
         size++;
     }
     T removeStart(){
-        Node *nextNode = headerNode->link;
+        Node *firstNode = headerNode->link;
+        T poppedValue = firstNode->element;
 
-        T poppedValue = nextNode->element;
-        delete(headerNode->link);
+        Node *secondNode = firstNode->link;
 
-        headerNode->link = nextNode->link;
+        cout << "the address of " << poppedValue << " is " << firstNode << endl;
+        cout << "and the link is " << firstNode->link << endl;
+        cout << "address of header node is " << headerNode << endl;
+        cout << "the old link of header node is " << headerNode->link << endl;
+
+
+        delete((headerNode->link));
+
+        headerNode->link = secondNode;
+
+        cout << "the new link of header node is " << headerNode->link << endl;
+        cout << endl;
+
 
         size--;
         return poppedValue;
@@ -144,7 +166,7 @@ public:
 
 template<typename T>
 class Stack:public SimpleList<T>{
-    string name;
+string name;
 //LIFO
 public:
     void push(T value){
@@ -184,9 +206,9 @@ public:
 
 template <typename T>
 SimpleList<T>* getList(string name, list<SimpleList<T>*> listSL){
-    for (auto it = listSL.begin(); it != listSL.end(); ++it){
-        if(((*it)->getName()) == name)
-            return *it;
+    for (auto iter = listSL.begin(); iter != listSL.end(); ++iter){
+        if(((*iter)->getName()) == name)
+            return *iter;
     }
     return nullptr;
 }
@@ -220,6 +242,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<double> *pSLd;
                     pSLd = new Stack<double>(listName);
+                    pSLd->initialize();
                     listSLd.push_front(pSLd);
                 }
                 else{
@@ -230,6 +253,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<double> *pSLd;
                     pSLd = new Queue<double>(listName);
+                    pSLd->initialize();
                     listSLd.push_front(pSLd);
                 }
                 else{
@@ -240,6 +264,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLi) == nullptr){
                     SimpleList<int> *pSLi;
                     pSLi = new Stack<int>(listName);
+                    pSLi->initialize();
                     listSLi.push_front(pSLi);
                 }
                 else{
@@ -250,6 +275,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLi) == nullptr){
                     SimpleList<int> *pSLi;
                     pSLi = new Queue<int>(listName);
+                    pSLi->initialize();
                     listSLi.push_front(pSLi);
                 }
                 else{
@@ -260,6 +286,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLi) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Stack<string>(listName);
+                    pSLs->initialize();
                     listSLs.push_front(pSLs);
                 }
                 else{
@@ -270,6 +297,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Queue<string>(listName);
+                    pSLs->initialize();
                     listSLs.push_front(pSLs);
                 }
                 else{
@@ -368,7 +396,8 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
 
 
 int main(){
-    parse("myInput.txt", "output.txt");
+    cout << endl;
+    parse("input.txt", "output.txt");
     return 0;
 }
 

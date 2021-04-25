@@ -17,6 +17,24 @@ PROCESSING COMMAND: pop s99
 Value popped: World
 PROCESSING COMMAND: push s99 planet
 PROCESSING COMMAND: pop i2
-Value popped: 15106072
+Value popped: -50
 PROCESSING COMMAND: push i2 150
 PROCESSING COMMAND: pop s99
+Value popped: planet
+PROCESSING COMMAND: pop s99
+Value popped: Hello
+PROCESSING COMMAND: create d99 stack
+PROCESSING COMMAND: push d99 0.123
+PROCESSING COMMAND: push d99 -0.456
+PROCESSING COMMAND: pop d99
+Value popped: -0.456
+PROCESSING COMMAND: pop s99
+ERROR: This list is empty!
+PROCESSING COMMAND: push dHelloWorld 0.5
+ERROR: This name does not exist!
+PROCESSING COMMAND: pop dHelloWorld
+ERROR: This name does not exist!
+PROCESSING COMMAND: push i2 200
+PROCESSING COMMAND: pop i2
+Value popped: 200
+PROCESSING COMMAND: pop i1
