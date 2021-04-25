@@ -1,52 +1,28 @@
-create a queueof name i1
-create a queueof name i1
-create a stackof name i1
-create a stackof name i2
-create a stackof name s99
-push value 50to i1
-push value 100to i1
-push value -50to i2
-push value 100to i2
-push value Helloto s99
-push value Worldto s99
-pop a value from i2
-pop a value from s99
-push value planetto s99
-pop a value from i2
-push value 150to i2
-pop a value from s99
-pop a value from s99
-create a stackof name d99
-push value 0.123to d99
-push value -0.456to d99
-pop a value from d99
-pop a value from s99
-push value 0.5to dHelloWorld
-pop a value from dHelloWorld
-push value 200to i2
-pop a value from i2
-pop a value from i1
-push value 150to i1
-push value 200to i1
-pop a value from i1
-create a stackof name dHelloWorld
-create a queueof name dHelloPlanet
-push value 3.14to dHelloWorld
-pop a value from i2
-pop a value from i2
-push value 3.1415to dHelloWorld
-push value -60.5to dHelloPlanet
-push value -1to dHelloWorld
-pop a value from dHelloWorld
-pop a value from dHelloPlanet
-pop a value from sR2D2
-create a queueof name sR2D2
-pop a value from sR2D2
-push value 123abcDEFto sR2D2
-push value G4H5I6j7k8l9to sR2D2
-pop a value from sR2D2
-pop a value from sR2D2
-pop a value from sR2D2
-pop a value from dHelloWorld
-pop a value from dHelloWorld
-pop a value from dHelloWorld
+PROCESSING COMMAND: create i1 queuelist type: i
+list name: i1
+list structure: queue
+PROCESSING COMMAND: create i1 queuelist type: i
+list name: i1
+list structure: queue
+PROCESSING COMMAND: create i1 stacklist type: i
+list name: i1
+list structure: stack
+PROCESSING COMMAND: create i2 stacklist type: i
+list name: i2
+list structure: stack
+PROCESSING COMMAND: create s99 stacklist type: s
+list name: s99
+list structure: stack
+PROCESSING COMMAND: push i1 50PROCESSING COMMAND: push i1 100PROCESSING COMMAND: push i2 -50PROCESSING COMMAND: push i2 100PROCESSING COMMAND: push s99 HelloPROCESSING COMMAND: push s99 WorldPROCESSING COMMAND: pop i2PROCESSING COMMAND: pop s99PROCESSING COMMAND: push s99 planetPROCESSING COMMAND: pop i2PROCESSING COMMAND: push i2 150PROCESSING COMMAND: pop s99PROCESSING COMMAND: pop s99PROCESSING COMMAND: create d99 stacklist type: d
+list name: d99
+list structure: stack
+PROCESSING COMMAND: push d99 0.123PROCESSING COMMAND: push d99 -0.456PROCESSING COMMAND: pop d99PROCESSING COMMAND: pop s99PROCESSING COMMAND: push dHelloWorld 0.5PROCESSING COMMAND: pop dHelloWorldPROCESSING COMMAND: push i2 200PROCESSING COMMAND: pop i2PROCESSING COMMAND: pop i1PROCESSING COMMAND: push i1 150PROCESSING COMMAND: push i1 200PROCESSING COMMAND: pop i1PROCESSING COMMAND: create dHelloWorld stacklist type: d
+list name: dHelloWorld
+list structure: stack
+PROCESSING COMMAND: create dHelloPlanet queuelist type: d
+list name: dHelloPlanet
+list structure: queue
+PROCESSING COMMAND: push dHelloWorld 3.14PROCESSING COMMAND: pop i2PROCESSING COMMAND: pop i2PROCESSING COMMAND: push dHelloWorld 3.1415PROCESSING COMMAND: push dHelloPlanet -60.5PROCESSING COMMAND: push dHelloWorld -1PROCESSING COMMAND: pop dHelloWorldPROCESSING COMMAND: pop dHelloPlanetPROCESSING COMMAND: pop sR2D2PROCESSING COMMAND: create sR2D2 queuelist type: s
+list name: sR2D2
+list structure: queue
+PROCESSING COMMAND: pop sR2D2PROCESSING COMMAND: push sR2D2 123abcDEFPROCESSING COMMAND: push sR2D2 G4H5I6j7k8l9PROCESSING COMMAND: pop sR2D2PROCESSING COMMAND: pop sR2D2PROCESSING COMMAND: pop sR2D2PROCESSING COMMAND: pop dHelloWorldPROCESSING COMMAND: pop dHelloWorldPROCESSING COMMAND: pop dHelloWorld

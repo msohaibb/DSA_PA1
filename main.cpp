@@ -77,75 +77,62 @@ public:
     virtual void push(T value) = 0;
     virtual T pop() = 0;
     virtual string getName() = 0;
-    virtual void setName(string theName);
 
 //list-related variables and getters/setters
 public:
-
     int size = 0;
-
-    void setHeaderAddress(Node* address){
-        headerAddress = address;
-    }
-    Node* getHeaderAddress(){
-        return headerAddress;
-    }
     int getLength(){
         return size;
     }
 
-
 public:
-    Node* lastAddress = nullptr;
-    Node* headerAddress = nullptr;
-    Node* initialize(){
-        Node headerNode = new Node();
-        headerNode->element = 0;
+    Node* headerNode = new Node();
+    Node* lastNode = headerNode;
+    /*Node* initialize(){
+        Node *headerNode;
+        headerNode = new Node();
+        //headerNode->element = 0;
         headerNode->link = nullptr;
 
-        setHeaderAddress(*headerNode);
 
-        return *headerNode;
-    }
+        return headerNode;
+    }*/
 
 public:
     void insertStart(T value){
-        Node *headerNode = headerAddress;
         Node *addedNode = new Node;
-
         addedNode->link = headerNode;
         addedNode->element = value;
 
-        (*headerNode).link = addedNode;
+        headerNode->link = addedNode;
 
         if(size == 0){
-            lastAddress = addedNode->link;
+            lastNode = addedNode->link;
         }
         size++;
     }
     void insertEnd(T value){
-        Node lastNode = &lastAddress;
+        //Node lastNode = *lastAddress;
 
-        Node *addedNode = nullptr;
+        Node *addedNode;
         addedNode = new Node;
 
         addedNode->link = nullptr;
         addedNode->element = value;
 
-        lastAddress = *addedNode;
+        lastNode = addedNode;
 
-        lastNode.link = *addedNode;
+        lastNode->link = addedNode;
 
         size++;
     }
     T removeStart(){
-        Node *headerNode = headerAddress;
-        Node nextNode = *(*headerNode).link;
+        Node *nextNode = (*headerNode).link;
 
-        T poppedValue = nextNode.element;
+        T poppedValue = (*nextNode).element;
         delete((*headerNode).link);
 
-        (*headerNode).link = nextNode.link;
+        (*headerNode).link = (*nextNode).link;
 
         size--;
         return poppedValue;
@@ -155,10 +142,9 @@ public:
 
 template<typename T>
 class Stack:public SimpleList<T>{
-string name;
+    string name;
 //LIFO
 public:
-
     void push(T value){
         this->insertStart(value);
     }
@@ -169,11 +155,9 @@ public:
     string getName(){
         return name;
     }
-    void setName(string givenName){
-        name = givenName;
-    }
+
     Stack(string givenName){
-        setName(givenName);
+        name = givenName;
     }
 };
 
@@ -181,7 +165,7 @@ public:
 template<typename T>
 class Queue:public SimpleList<T>{
 //LIFO
-string name;
+    string name;
 public:
     void push(T value){
         this->insertEnd(value);
@@ -212,6 +196,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
     string line;
     string listType;
     string listName;
+    string listStructure;
 
     int valueInt;
     double valueDouble;
@@ -221,57 +206,126 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
     list<SimpleList<double>*> listSLd;
     list<SimpleList<string>*> listSLs;
 
-
+    cout << "This is the beginning of the function.";
     while(getline(input, line))
     {
+        //cout << line;
+        output << "PROCESSING COMMAND: " << line;
         if(split(line, ' ', 0) == "create"){
-             listType = split(line, ' ', 1)[0];
-             listName = split(line, ' ', 1);
-             if(listType == "d"){
-                 if(getList(listName, listSLd) == nullptr){
-                     SimpleList<double> *pSLd;
-                     pSLd = new Stack<double>(listName);
-                     listSLd.push_front(pSLd);
-                 }
-                 else{
-                     cout << "ERROR: This name already exists!";
-                 }
-             }
-             else if(listType == "i"){
-                 if(getList(listName, listSLi) == nullptr){
-                     SimpleList<int> *pSLi;
-                     pSLi = new Stack<int>(listName);
-                     listSLi.push_front(pSLi);
-                 }
-                 else{
-                     cout << "ERROR: This name already exists!";
-                 }
-             }
-             else{
-                 if(getList(listName, listSLd) == nullptr){
-                     SimpleList<string> *pSLs;
-                     pSLs = new Stack<string>(listName);
-                     listSLs.push_front(pSLs);
-                 }
-                 else{
-                     cout << "ERROR: This name already exists!";
-                 }
-             }
+            listType = split(line, ' ', 1)[0];
+            listName = split(line, ' ', 1);
+            listStructure = split(line, ' ', 2);
+            output << "list type: " << listType << endl;
+            output << "list name: " << listName << endl;
+            output << "list structure: " << listStructure << endl;
+
+            if(listType == "d" && listStructure == "stack"){
+                if(getList(listName, listSLd) == nullptr){
+                    SimpleList<double> *pSLd;
+                    pSLd = new Stack<double>(listName);
+                    cout << "stack double created";
+                    listSLd.push_front(pSLd);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
+            else if(listType == "d" && listStructure == "queue"){
+                if(getList(listName, listSLd) == nullptr){
+                    SimpleList<double> *pSLd;
+                    pSLd = new Queue<double>(listName);
+                    cout << "queue double created";
+                    listSLd.push_front(pSLd);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
+            else if(listType == "i" && listStructure == "stack"){
+                if(getList(listName, listSLi) == nullptr){
+                    SimpleList<int> *pSLi;
+                    pSLi = new Stack<int>(listName);
+                    cout << "stack int created";
+                    listSLi.push_front(pSLi);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
+            else if(listType == "i" && listStructure == "queue"){
+                if(getList(listName, listSLi) == nullptr){
+                    cout << "queue int created";
+                    SimpleList<int> *pSLi;
+                    pSLi = new Queue<int>(listName);
+
+                    listSLi.push_front(pSLi);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
+            else if(listType == "s" && listStructure == "stack"){
+                if(getList(listName, listSLi) == nullptr){
+                    SimpleList<string> *pSLs;
+                    pSLs = new Stack<string>(listName);
+                    cout << "stack string created";
+                    listSLs.push_front(pSLs);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
+            else if(listType == "s" && listStructure == "queue"){
+                if(getList(listName, listSLd) == nullptr){
+                    SimpleList<string> *pSLs;
+                    pSLs = new Queue<string>(listName);
+                    cout << "queue string created";
+                    listSLs.push_front(pSLs);
+                }
+                else{
+                    output << "ERROR: This name already exists!";
+                }
+            }
         }
+        /*
+         * pop usage
+         * first checks if array is empty
+         * if not, pops the function and prints the value popped
+         */
+        /*
         else if(split(line, ' ', 0) == "pop"){
             listType = split(line, ' ', 1)[0];
             listName = split(line, ' ', 1);
+
             if(listType == "d"){
                 SimpleList<double> *SLAddressD = getList(listName, listSLd);
-                cout << SLAddressD->pop();
+                if(SLAddressD->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!";
+                }
+                else {
+                    output << "Value popped: " << SLAddressD->pop();
+                }
             }
             else if(listType == "i"){
                 SimpleList<int>* SLAddressI = getList(listName, listSLi);
-                cout << SLAddressI->pop();
+                if(SLAddressI->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!";
+                }
+                else {
+                    output << "Value popped: " << SLAddressI->pop();
+                }
             }
             else{
                 SimpleList<string>* SLAddressS = getList(listName, listSLs);
-                cout << SLAddressS->pop();
+                if(SLAddressS->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!";
+                }
+                else {
+                    output << "Value popped: " << SLAddressS->pop();
+                }
             }
         }
         else{
@@ -292,7 +346,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 SimpleList<string> *SLAddressS = getList(listName, listSLs);
                 SLAddressS->push(valueString);
             }
-        }
+        }*/
     }
     input.close();
     output.close();
@@ -300,16 +354,8 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
 
 
 int main(){
-    string fileInput;
-    string fileOutput;
-
-    cout << "Enter name of input file: ";
-    cin >> fileInput;
-
-    cout << "Enter name of output file: ";
-    cin >> fileOutput;
-
-    parse(fileInput, fileOutput);
+    //cout << "MAIN WORKS!!!";
+    parse("input.txt", "output.txt");
 
     return 0;
 }
