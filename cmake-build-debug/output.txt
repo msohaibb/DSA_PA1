@@ -1,52 +1,52 @@
-create i1 queue
-create i1 queue
-create i1 stack
-create i2 stack
-create s99 stack
-push i1 50
-push i1 100
-push i2 -50
-push i2 100
-push s99 Hello
-push s99 World
-pop i2
-pop s99
-push s99 planet
-pop i2
-push i2 150
-pop s99
-pop s99
-create d99 stack
-push d99 0.123
-push d99 -0.456
-pop d99
-pop s99
-push dHelloWorld 0.5
-pop dHelloWorld
-push i2 200
-pop i2
-pop i1
-push i1 150
-push i1 200
-pop i1
-create dHelloWorld stack
-create dHelloPlanet queue
-push dHelloWorld 3.14
-pop i2
-pop i2
-push dHelloWorld 3.1415
-push dHelloPlanet -60.5
-push dHelloWorld -1
-pop dHelloWorld
-pop dHelloPlanet
-pop sR2D2
-create sR2D2 queue
-pop sR2D2
-push sR2D2 123abcDEF
-push sR2D2 G4H5I6j7k8l9
-pop sR2D2
-pop sR2D2
-pop sR2D2
-pop dHelloWorld
-pop dHelloWorld
-pop dHelloWorld
+create a queueof name i1
+create a queueof name i1
+create a stackof name i1
+create a stackof name i2
+create a stackof name s99
+push value 50to i1
+push value 100to i1
+push value -50to i2
+push value 100to i2
+push value Helloto s99
+push value Worldto s99
+pop a value from i2
+pop a value from s99
+push value planetto s99
+pop a value from i2
+push value 150to i2
+pop a value from s99
+pop a value from s99
+create a stackof name d99
+push value 0.123to d99
+push value -0.456to d99
+pop a value from d99
+pop a value from s99
+push value 0.5to dHelloWorld
+pop a value from dHelloWorld
+push value 200to i2
+pop a value from i2
+pop a value from i1
+push value 150to i1
+push value 200to i1
+pop a value from i1
+create a stackof name dHelloWorld
+create a queueof name dHelloPlanet
+push value 3.14to dHelloWorld
+pop a value from i2
+pop a value from i2
+push value 3.1415to dHelloWorld
+push value -60.5to dHelloPlanet
+push value -1to dHelloWorld
+pop a value from dHelloWorld
+pop a value from dHelloPlanet
+pop a value from sR2D2
+create a queueof name sR2D2
+pop a value from sR2D2
+push value 123abcDEFto sR2D2
+push value G4H5I6j7k8l9to sR2D2
+pop a value from sR2D2
+pop a value from sR2D2
+pop a value from sR2D2
+pop a value from dHelloWorld
+pop a value from dHelloWorld
+pop a value from dHelloWorld
