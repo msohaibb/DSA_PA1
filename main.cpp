@@ -18,7 +18,7 @@ using namespace std;
  * returns the section specified by index
  * meant to split commands by the spaces
  */
-string split(string phrase, char splitter, int index){
+string split(string phrase, int index){
     string firstWord;
     string secondWord;
     string thirdWord;
@@ -26,7 +26,7 @@ string split(string phrase, char splitter, int index){
 
     for(int i = 0; i < phrase.length(); i++)
     {
-        if(phrase[i] == splitter)
+        if(phrase[i] == ' ' || phrase[i] == '\n')
         {
             temp = i;
             break;
@@ -34,7 +34,7 @@ string split(string phrase, char splitter, int index){
         firstWord += phrase[i];
     }
     for(int j = temp + 1; j < phrase.length(); j++){
-        if(phrase[j] == splitter)
+        if(phrase[j] == ' ' || phrase[j] == '\n')
         {
             temp = j;
             break;
@@ -49,11 +49,13 @@ string split(string phrase, char splitter, int index){
     }
     else{
         for(int k = temp + 1; k <= phrase.length(); k++){
-            if(phrase[k] == 0)
+
+            if(phrase[k] == 0 || phrase[k] == ' ' || phrase[k] == '\n')
             {
                 return thirdWord;
             }
             thirdWord += phrase[k];
+
         }
     }
     return "";
@@ -127,12 +129,12 @@ public:
         size++;
     }
     T removeStart(){
-        Node *nextNode = (*headerNode).link;
+        Node *nextNode = headerNode->link;
 
-        T poppedValue = (*nextNode).element;
-        delete((*headerNode).link);
+        T poppedValue = nextNode->element;
+        delete(headerNode->link);
 
-        (*headerNode).link = (*nextNode).link;
+        headerNode->link = nextNode->link;
 
         size--;
         return poppedValue;
@@ -160,7 +162,6 @@ public:
         name = givenName;
     }
 };
-
 
 template<typename T>
 class Queue:public SimpleList<T>{
@@ -206,24 +207,19 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
     list<SimpleList<double>*> listSLd;
     list<SimpleList<string>*> listSLs;
 
-    cout << "This is the beginning of the function.";
     while(getline(input, line))
     {
-        //cout << line;
-        output << "PROCESSING COMMAND: " << line;
-        if(split(line, ' ', 0) == "create"){
-            listType = split(line, ' ', 1)[0];
-            listName = split(line, ' ', 1);
-            listStructure = split(line, ' ', 2);
-            output << "list type: " << listType << endl;
-            output << "list name: " << listName << endl;
-            output << "list structure: " << listStructure << endl;
+        output << "PROCESSING COMMAND: " << line << endl;
+        if(split(line, 0) == "create"){
+
+            listType = split(line,  1)[0];
+            listName = split(line, 1);
+            listStructure = split(line,  2);
 
             if(listType == "d" && listStructure == "stack"){
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<double> *pSLd;
                     pSLd = new Stack<double>(listName);
-                    cout << "stack double created";
                     listSLd.push_front(pSLd);
                 }
                 else{
@@ -234,56 +230,51 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<double> *pSLd;
                     pSLd = new Queue<double>(listName);
-                    cout << "queue double created";
                     listSLd.push_front(pSLd);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
             else if(listType == "i" && listStructure == "stack"){
                 if(getList(listName, listSLi) == nullptr){
+                    //output << "d has been pushed!";
                     SimpleList<int> *pSLi;
                     pSLi = new Stack<int>(listName);
-                    cout << "stack int created";
                     listSLi.push_front(pSLi);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
             else if(listType == "i" && listStructure == "queue"){
                 if(getList(listName, listSLi) == nullptr){
-                    cout << "queue int created";
                     SimpleList<int> *pSLi;
                     pSLi = new Queue<int>(listName);
-
                     listSLi.push_front(pSLi);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
             else if(listType == "s" && listStructure == "stack"){
                 if(getList(listName, listSLi) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Stack<string>(listName);
-                    cout << "stack string created";
                     listSLs.push_front(pSLs);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
             else if(listType == "s" && listStructure == "queue"){
                 if(getList(listName, listSLd) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Queue<string>(listName);
-                    cout << "queue string created";
                     listSLs.push_front(pSLs);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
         }
@@ -292,61 +283,85 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
          * first checks if array is empty
          * if not, pops the function and prints the value popped
          */
-        /*
-        else if(split(line, ' ', 0) == "pop"){
-            listType = split(line, ' ', 1)[0];
-            listName = split(line, ' ', 1);
 
+        else if(split(line, 0) == "pop"){
+            listType = split(line, 1)[0];
+            listName = split(line, 1);
             if(listType == "d"){
                 SimpleList<double> *SLAddressD = getList(listName, listSLd);
-                if(SLAddressD->getLength() == 0)
-                {
-                    output << "ERROR: This list is empty!";
+                if(SLAddressD == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
                 }
-                else {
-                    output << "Value popped: " << SLAddressD->pop();
+                else if(SLAddressD->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!" << endl;
+                }
+                else{
+                    output << "Value popped: " << SLAddressD->pop() << endl;
                 }
             }
             else if(listType == "i"){
                 SimpleList<int>* SLAddressI = getList(listName, listSLi);
-                if(SLAddressI->getLength() == 0)
-                {
-                    output << "ERROR: This list is empty!";
+                if(SLAddressI == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
                 }
-                else {
-                    output << "Value popped: " << SLAddressI->pop();
+                else if(SLAddressI->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!" << endl;
+                }
+                else{
+                    output << "Value popped: " << SLAddressI->pop() << endl;
                 }
             }
             else{
                 SimpleList<string>* SLAddressS = getList(listName, listSLs);
-                if(SLAddressS->getLength() == 0)
-                {
-                    output << "ERROR: This list is empty!";
+                if(SLAddressS == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
                 }
-                else {
-                    output << "Value popped: " << SLAddressS->pop();
+                else if(SLAddressS->getLength() == 0)
+                {
+                    output << "ERROR: This list is empty!" << endl;
+                }
+                else{
+                    output << "Value popped: " << SLAddressS->pop() << endl;
                 }
             }
         }
         else{
-            listType = split(line, ' ', 1)[0];
-            listName = split(line, ' ', 1);
+            listType = split(line, 1)[0];
+            listName = split(line, 1);
             if(listType == "d"){
-                valueDouble = std::stod(split(line, ' ', 2));
+                valueDouble = std::stod(split(line, 2));
                 SimpleList<double> *SLAddressD = getList(listName, listSLd);
-                SLAddressD->push(valueDouble);
+                if(SLAddressD == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
+                }
+                else{
+                    SLAddressD->push(valueDouble);
+                }
+
             }
             else if(listType == "i"){
-                valueInt = std::stoi(split(line, ' ', 2));
+                valueInt = std::stoi(split(line, 2));
                 SimpleList<int> *SLAddressI = getList(listName, listSLi);
-                SLAddressI->push(valueInt);
+                if(SLAddressI == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
+                }
+                else{
+                    SLAddressI->push(valueInt);
+                }
             }
             else{
-                valueString = split(line, ' ', 2);
+                valueString = split(line, 2);
                 SimpleList<string> *SLAddressS = getList(listName, listSLs);
-                SLAddressS->push(valueString);
+                if(SLAddressS == nullptr){
+                    output << "ERROR: This name does not exist!" << endl;
+                }
+                else{
+                    SLAddressS->push(valueString);
+                }
             }
-        }*/
+        }
     }
     input.close();
     output.close();
@@ -354,9 +369,7 @@ void parse(const string& readFile, const string& writeFile) { //opens the input 
 
 
 int main(){
-    //cout << "MAIN WORKS!!!";
-    parse("input.txt", "output.txt");
-
+    parse("myInput.txt", "output.txt");
     return 0;
 }
 

@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/DSA_PA1.dir/main.cpp.o"
+  "CMakeFiles/DSA_PA1.dir/main.cpp.obj"
   "DSA_PA1.exe"
+  "DSA_PA1.exe.manifest"
   "DSA_PA1.pdb"
   "libDSA_PA1.dll.a"
 )
