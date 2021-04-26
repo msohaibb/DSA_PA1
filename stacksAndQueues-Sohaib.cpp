@@ -277,7 +277,7 @@ void parse(const string& readFile, const string& writeFile) {
                     listSLd.push_front(pSLd);
                 }
                 else{
-                    output << "ERROR: This name already exists!";
+                    output << "ERROR: This name already exists!" << endl;
                 }
             }
             else if(listType == "d" && listStructure == "queue"){
@@ -314,7 +314,7 @@ void parse(const string& readFile, const string& writeFile) {
                 }
             }
             else if(listType == "s" && listStructure == "stack"){
-                if(getList(listName, listSLi) == nullptr){
+                if(getList(listName, listSLs) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Stack<string>(listName);
                     pSLs->initialize();
@@ -325,7 +325,7 @@ void parse(const string& readFile, const string& writeFile) {
                 }
             }
             else if(listType == "s" && listStructure == "queue"){
-                if(getList(listName, listSLd) == nullptr){
+                if(getList(listName, listSLs) == nullptr){
                     SimpleList<string> *pSLs;
                     pSLs = new Queue<string>(listName);
                     pSLs->initialize();

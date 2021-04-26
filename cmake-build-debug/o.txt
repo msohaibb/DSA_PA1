@@ -1,0 +1,3 @@
+PROCESSING COMMAND: create s1 queue
+PROCESSING COMMAND: create s1 stack
+ERROR: This name already exists!
