@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Sohaib Bhatti/CLionProjects/DSA-PA1/main.cpp">
+		<Unit filename="C:/Users/Sohaib Bhatti/CLionProjects/DSA-PA1/stacksAndQueues-Sohaib.cpp">
 			<Option target="DSA_PA1"/>
 		</Unit>
 		<Unit filename="C:/Users/Sohaib Bhatti/CLionProjects/DSA-PA1/CMakeLists.txt">

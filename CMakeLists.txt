@@ -3,4 +3,4 @@ project(DSA_PA1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DSA_PA1 main.cpp)
+add_executable(DSA_PA1 stacksAndQueues-Sohaib.cpp)

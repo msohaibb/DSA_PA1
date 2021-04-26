@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/DSA_PA1.dir/main.cpp.obj"
+  "CMakeFiles/DSA_PA1.dir/stacksAndQueues-Sohaib.cpp.obj"
   "DSA_PA1.exe"
   "DSA_PA1.exe.manifest"
   "DSA_PA1.pdb"

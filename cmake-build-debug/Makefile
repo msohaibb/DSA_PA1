@@ -141,32 +141,32 @@ DSA_PA1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/build
 .PHONY : DSA_PA1/fast
 
-main.obj: main.cpp.obj
+stacksAndQueues-Sohaib.obj: stacksAndQueues-Sohaib.cpp.obj
 
-.PHONY : main.obj
+.PHONY : stacksAndQueues-Sohaib.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+stacksAndQueues-Sohaib.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/stacksAndQueues-Sohaib.cpp.obj
+.PHONY : stacksAndQueues-Sohaib.cpp.obj
 
-main.i: main.cpp.i
+stacksAndQueues-Sohaib.i: stacksAndQueues-Sohaib.cpp.i
 
-.PHONY : main.i
+.PHONY : stacksAndQueues-Sohaib.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/main.cpp.i
-.PHONY : main.cpp.i
+stacksAndQueues-Sohaib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/stacksAndQueues-Sohaib.cpp.i
+.PHONY : stacksAndQueues-Sohaib.cpp.i
 
-main.s: main.cpp.s
+stacksAndQueues-Sohaib.s: stacksAndQueues-Sohaib.cpp.s
 
-.PHONY : main.s
+.PHONY : stacksAndQueues-Sohaib.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/main.cpp.s
-.PHONY : main.cpp.s
+stacksAndQueues-Sohaib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DSA_PA1.dir\build.make CMakeFiles/DSA_PA1.dir/stacksAndQueues-Sohaib.cpp.s
+.PHONY : stacksAndQueues-Sohaib.cpp.s
 
 # Help Target
 help:
@@ -177,9 +177,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DSA_PA1
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... stacksAndQueues-Sohaib.obj
+	@echo ... stacksAndQueues-Sohaib.i
+	@echo ... stacksAndQueues-Sohaib.s
 .PHONY : help
 
 

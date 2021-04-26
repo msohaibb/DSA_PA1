@@ -168,7 +168,7 @@ protected:
             Node *secondNode = firstNode->link;
             delete(firstNode);
             headerNode->link = secondNode;
-            lastNode = headerNode;
+            lastNode = secondNode;
         }
         else{
             Node *secondNode = firstNode->link;
@@ -437,10 +437,10 @@ int main(){
     string input;
     string output;
 
-    cout << "Name of input file: ";
+    cout << "Name of input file:";
     cin >> input;
 
-    cout << "Name of output file: ";
+    cout << "Name of output file:";
     cin >> output;
 
     parse(input, output);
