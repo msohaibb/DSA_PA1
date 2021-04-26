@@ -148,8 +148,6 @@ protected:
         }
 
         size++;
-        cout << size << " pushed: " << value << endl;
-        cout << "header node after push: " << headerNode->link << endl;
     }
     /*
      * Finds the first node and the element inside of it.
@@ -157,15 +155,19 @@ protected:
      * Deletes the first node, and sets the second node to be the first
      */
     T removeStart(){
-        cout << "hello" << endl;
         Node *firstNode = headerNode->link;
         T value = firstNode->element;
 
-        cout << "header node before pop is: " << firstNode;
 
         if(size == 1){
             delete(firstNode);
             headerNode->link = nullptr;
+            lastNode = headerNode;
+        }
+        else if(size == 2){
+            Node *secondNode = firstNode->link;
+            delete(firstNode);
+            headerNode->link = secondNode;
             lastNode = headerNode;
         }
         else{
@@ -178,8 +180,6 @@ protected:
 
         size--;
 
-        cout << size << " popped: " << value << endl;
-        cout << "header node after pop: " << headerNode->link << endl;
         return value;
 
     }
@@ -434,7 +434,15 @@ void parse(const string& readFile, const string& writeFile) {
 
 
 int main(){
-    cout << endl;
-    parse("input.txt", "output.txt");
+    string input;
+    string output;
+
+    cout << "Name of input file: ";
+    cin >> input;
+
+    cout << "Name of output file: ";
+    cin >> output;
+
+    parse(input, output);
     return 0;
 }
