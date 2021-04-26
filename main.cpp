@@ -142,13 +142,14 @@ protected:
 
         lastNode = addedNode;
 
-        cout << size;
 
         if(size == 0){
-            headerNode->link = lastNode;
+            headerNode->link = addedNode;
         }
 
         size++;
+        cout << size << " pushed: " << value << endl;
+        cout << "header node after push: " << headerNode->link << endl;
     }
     /*
      * Finds the first node and the element inside of it.
@@ -156,16 +157,30 @@ protected:
      * Deletes the first node, and sets the second node to be the first
      */
     T removeStart(){
+        cout << "hello" << endl;
         Node *firstNode = headerNode->link;
-        T poppedValue = firstNode->element;
+        T value = firstNode->element;
 
-        Node *secondNode = firstNode->link;
+        cout << "header node before pop is: " << firstNode;
 
-        delete((headerNode->link));
-        headerNode->link = secondNode;
+        if(size == 1){
+            delete(firstNode);
+            headerNode->link = nullptr;
+            lastNode = headerNode;
+        }
+        else{
+            Node *secondNode = firstNode->link;
+            delete(firstNode);
+            headerNode->link = secondNode;
+        }
+
+
 
         size--;
-        return poppedValue;
+
+        cout << size << " popped: " << value << endl;
+        cout << "header node after pop: " << headerNode->link << endl;
+        return value;
 
     }
 };
@@ -321,12 +336,12 @@ void parse(const string& readFile, const string& writeFile) {
                 }
             }
         }
-        /*
-         * This is where SimpleLists are popped.
-         * It checks which type of SimpleList it is and uses the appropriate C++ List
-         * It looks for the name in the C++ List.
-         * If it finds it, pops the function and prints the value popped
-         */
+            /*
+             * This is where SimpleLists are popped.
+             * It checks which type of SimpleList it is and uses the appropriate C++ List
+             * It looks for the name in the C++ List.
+             * If it finds it, pops the function and prints the value popped
+             */
 
         else if(split(line, 0) == "pop"){
             listType = split(line, 1)[0];
@@ -371,12 +386,12 @@ void parse(const string& readFile, const string& writeFile) {
                 }
             }
         }
-        /*
-         * This is where SimpleLists are pushed.
-         * It checks which type of SimpleList it is and uses the appropriate C++ List
-         * It looks for the name in the C++ List.
-         * If it finds it, pushes the given value onto the SimpleList
-         */
+            /*
+             * This is where SimpleLists are pushed.
+             * It checks which type of SimpleList it is and uses the appropriate C++ List
+             * It looks for the name in the C++ List.
+             * If it finds it, pushes the given value onto the SimpleList
+             */
         else{
             listType = split(line, 1)[0];
             listName = split(line, 1);
@@ -423,5 +438,3 @@ int main(){
     parse("input.txt", "output.txt");
     return 0;
 }
-
-
